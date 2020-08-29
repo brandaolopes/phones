@@ -23,6 +23,9 @@ Author: Bruno Brandão
 	$apoiadoresDAO = new ApoiadoresDAO;
   
 //	$usuario = $usuarioDAO->buscaUm($id);
+if (isset($_GET['apoio_id'])){
+	$apoiador = $apoiadoresDAO->buscaUm($_GET['apoio_id']);
+}
 
 
 
@@ -44,7 +47,7 @@ Author: Bruno Brandão
 	
 	<script>
 		jQuery(function($){
-		$("#apoio_telefone").mask("(00) 0000-00009");
+		$("#apoio_telefone").mask("(00) 0 0000-0009");
 		});
 	</script>
 </head>
@@ -52,7 +55,7 @@ Author: Bruno Brandão
 
 	<nav class="navbar navbar-light bg-light">
 		<div class="container">
-			<a class="navbar-brand">Cadastrar Apoiador</a>
+			<a class="navbar-brand">Editar Apoiador</a>
 		</div>
 	</nav>	  
 	<div class="container">
@@ -61,7 +64,8 @@ Author: Bruno Brandão
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="#">Início</a></li>
 					<li class="breadcrumb-item"><a href="gerenciarApoiadores.php">Gerenciar Apoiadores</a></li>
-					<li class="breadcrumb-item active" aria-current="page">Cadastrar Apoiador</li>
+					<li class="breadcrumb-item active">Editar Apoiador</li>
+					<li class="breadcrumb-item active" aria-current="page"><?php echo $apoiador['apoio_nome'] ?></li>
 				</ol>
 			</nav>
 			<div class="card-body">
@@ -71,19 +75,20 @@ Author: Bruno Brandão
                         	<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
                         <strong>Apoiador já cadastrado anteriormente! Evite cadastros em duplicidade.</strong></div>
                 <?php }; ?>
-				<form action="cadastrar.php" name="form1" method="POST" enctype="multipart/form-data">
+				<form action="editar.php" name="form1" method="POST" enctype="multipart/form-data">
 					<div class="form-row">
 						<div class="form-group col-md-6">
 							<label for="apoio_nome">Nome</label>
-							<input type="text" class="form-control" id="apoio_nome" name="apoio_nome" required>
+							<input type="text" class="form-control" id="apoio_nome" name="apoio_nome" value="<?php echo $apoiador['apoio_nome'] ?>" required>
 						</div>
 						<div class="form-group col-md-6">
 							<label for="apoio_telefone">Telefone</label>
-							<input type="tel" maxlength="18" data-mask="(00) 0000-00009" placeholder="(00) 00000-0000"  pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4,5}" class="form-control" id="apoio_telefone" name="apoio_telefone" required>
+							<input type="tel" maxlength="18" data-mask="(00) 0 0000-0000" placeholder="<?php echo $apoiador['apoio_telefone'] ?>"  pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4,5}" class="form-control" id="apoio_telefone" name="apoio_telefone" value="">
 						</div>
 					</div>
-					<input type="hidden" name="cadastrar-apoiador" value="form1">
-					<button type="submit" class="btn btn-primary">Cadastrar!</button>
+					<input type="hidden" name="apoio_id" value="<?php $_GET['apoio_id']?>">
+					<input type="hidden" name="editar_apoiador" value="form1">
+					<button type="submit" class="btn btn-primary">Salvar!</button>
 				</form>
 			</div>
 		</div>
