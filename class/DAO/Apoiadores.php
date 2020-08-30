@@ -2,7 +2,7 @@
     require_once 'Conexao.class.php';
     require_once '../class/entidades/Apoiadores.class.php';
 
-    class ApoiadoresDAO{
+    class ApoiadoresDAO {
         private $conexao;
        
 
@@ -35,6 +35,23 @@
             $consulta = mysqli_query($this->conexao->getCon(), $sql);
             $user = mysqli_fetch_assoc($consulta);
             return $user;
+        }
+
+        function buscaVarios($nome){
+            $listas = array();
+
+            $sql = "SELECT * FROM apoiadores WHERE apoio_nome LIKE '%{$nome}%' OR apoio_telefone LIKE '%{$nome}%' ORDER BY apoio_nome ASC LIMIT 0, 10";
+            $consulta = mysqli_query($this->conexao->getCon(), $sql);
+            while ($array = mysqli_fetch_assoc($consulta)){
+                $lista = new Apoiadores;
+
+                $lista->setId($array['apoio_id']);
+                $lista->setNome($array['apoio_nome']);
+                $lista->setTelefone($array['apoio_telefone']);
+
+                array_push($listas, $lista);
+            }
+            return $listas;
         }
 
         function listarApoiadores($inicio){
@@ -87,15 +104,6 @@
             $nome = $apoiador->getNome();
             $telefone = $apoiador->getTelefone();
            
-            //teste para evitar usuario em duplicidade
-            //falta implementar o teste no update
-            $sql_teste= "SELECT * FROM apoiadores WHERE apoio_telefone='$telefone'";
-            $consulta_teste = mysqli_query($this->conexao->getCon(), $sql_teste);
-            $teste= mysqli_fetch_assoc($consulta_teste);
-            if(empty($teste)){
-                header("location: editarApoiador.php?apoio_id=&&erro=apoiador-ja-cadastrado");
-            //falta implementar o teste no update
-            }else{
                 $sql= "UPDATE apoiadores SET apoio_nome='$nome', apoio_telefone='$telefone' WHERE apoio_id='$id'";
                 $q = mysqli_query($this->conexao->getCon(), $sql);     
                     if($q == TRUE){ 
@@ -106,7 +114,7 @@
                         $x = 1;
                         header('Location: gerenciarApoiadores.php?editar=db-falha'); 
                     }
-            }
+            
         }
 
 

@@ -35,7 +35,7 @@ if (isset($_GET['apoio_id'])){
 <!doctype html>
 <html lang="pt-BR">
   <head>
-	<title>Gerenciar Apoiadores</title>
+	<title>Excluir Apoiadores</title>
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -55,7 +55,7 @@ if (isset($_GET['apoio_id'])){
 
 	<nav class="navbar navbar-light bg-light">
 		<div class="container">
-			<a class="navbar-brand">Editar Apoiador</a>
+			<a class="navbar-brand">Excluir Apoiador</a>
 		</div>
 	</nav>	  
 	<div class="container">
@@ -64,7 +64,7 @@ if (isset($_GET['apoio_id'])){
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="#">Início</a></li>
 					<li class="breadcrumb-item"><a href="gerenciarApoiadores.php">Gerenciar Apoiadores</a></li>
-					<li class="breadcrumb-item active">Editar Apoiador</li>
+					<li class="breadcrumb-item active">Excluir Apoiador</li>
 					<li class="breadcrumb-item active" aria-current="page"><?php echo $apoiador['apoio_nome'] ?></li>
 				</ol>
 			</nav>
@@ -75,20 +75,41 @@ if (isset($_GET['apoio_id'])){
                         	<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
                         <strong>Apoiador já cadastrado anteriormente! Evite cadastros em duplicidade.</strong></div>
                 <?php }; ?>
-				<form action="editar.php" name="form1" method="POST" enctype="multipart/form-data">
+				<form action="excluir.php" name="form1" method="POST" enctype="multipart/form-data">
 					<div class="form-row">
 						<div class="form-group col-md-6">
 							<label for="apoio_nome">Nome</label>
-							<input type="text" class="form-control" id="apoio_nome" name="apoio_nome" value="<?php echo $apoiador['apoio_nome'] ?>" required>
+							<input type="text" class="form-control" id="apoio_nome" name="apoio_nome" value="<?php echo $apoiador['apoio_nome'] ?>" disabled>
 						</div>
 						<div class="form-group col-md-6">
 							<label for="apoio_telefone">Telefone</label>
-							<input type="tel" maxlength="18" data-mask="(00) 00000-0000" placeholder="<?php echo $apoiador['apoio_telefone'] ?>" class="form-control" id="apoio_telefone" name="apoio_telefone" value="<?php echo $apoiador['apoio_telefone'] ?>">
+							<input type="tel" maxlength="18" data-mask="(00) 00000-0000" placeholder="<?php echo $apoiador['apoio_telefone'] ?>" class="form-control" id="apoio_telefone" name="apoio_telefone" value="<?php echo $apoiador['apoio_telefone'] ?>" disabled>
 						</div>
 					</div>
 					<input type="hidden" name="apoio_id" value="<?php echo $apoiador['apoio_id']?>">
-					<input type="hidden" name="editar_apoiador" value="form1">
-					<button type="submit" class="btn btn-primary">Salvar!</button>
+					<input type="hidden" name="excluir_apoiador" value="form1">
+					<button type="button" data-toggle="modal" data-target="#Modal1" class="btn btn-danger" >Excluir!</button>
+
+					<!-- Modal -->
+					<div class="modal fade" id="Modal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered">
+							<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">Confirma a exclusão?</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<p>Excluir <?php echo $apoiador['apoio_nome'] ?>?</p>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+								<button type="submit" class="btn btn-danger">Excluir!</button>
+							</div>
+							</div>
+						</div>
+					</div>
 				</form>
 			</div>
 		</div>

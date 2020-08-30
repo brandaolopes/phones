@@ -2,9 +2,9 @@
 
 class Conexao {
 
-    private $usuario = "root";
-    private $senha = "";
-    private $caminho = "localhost:3308";
+    private $usuario = "brandaolopes";
+    private $senha = "svR3JuG27HWmr9zq";
+    private $caminho = "localhost";
     private $banco = "cadastro";
 
     private $con;
