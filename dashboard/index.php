@@ -84,15 +84,15 @@ if(!isset($_SESSION['admin'])){
 			<div class="card-body">
 				<h5>Bem vindo! Por favor, escolha a opção desejada.</h5>
 				<div class="row">
-					<div class="col-2">
+					<div class="col-md-2">
 						<a href="gerenciarApoiadores.php"><img src="./img/associados.png" class="img img-rounded" width="60"/></a>
 						<p><a href="gerenciarApoiadores.php">Apoiadores</a></p>
 					</div>
-					<div class="col-2">
+					<div class="col-md-2">
 						<a href="gerenciarUsuarios.php"><img src="./img/people.png" class="img img-rounded" width="60"/></a>
 						<p><a href="gerenciarApoiadores.php">Administradores</a></p>
 					</div>
-					<div class="col-2">
+					<div class="col-md-2">
 						<a href="<?php echo $logoutAction ?>"><img src="./img/Sair.png" class="img img-rounded" width="60"/></a>
 						<p><a href="<?php echo $logoutAction ?>">Sair</a></p>
 					</div>

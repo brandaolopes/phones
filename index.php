@@ -35,7 +35,7 @@
       <h3 class="masthead-brand">Cadastro - 2020</h3>
       <nav class="nav nav-masthead justify-content-center">
         <a class="nav-link active" href="index.php">Início</a>
-        <a class="nav-link" href="#">Contato</a>
+        <a class="nav-link" href="mailto:brandao_lopes@live.com">Contato</a>
       </nav>
     </div>
   </header>
@@ -44,13 +44,13 @@
     <h1 class="cover-heading">Cadastro de Apoiadores</h1>
     <p class="lead">Página para cadastro e consulta de telefones de apoiadores.</p>
     <p class="lead">
-      <a href="#" class="btn btn-lg btn-secondary">Acessar</a>
+      <a href="./dashboard/index.php" class="btn btn-lg btn-secondary">Acessar</a>
     </p>
   </main>
 
   <footer class="mastfoot mt-auto">
     <div class="inner">
-      <p>Desenvolvido por <a href="https://twitter.com/brandao_lopes">@brandao_lopes</a>.</p>
+      <p>Desenvolvido por <a href="mailto:brandao_lopes@live.com">@brandao_lopes</a>.</p>
     </div>
   </footer>
 </div>
