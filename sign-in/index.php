@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.1.1">
-    <title>Signin Template · Bootstrap</title>
+    <title>Login</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sign-in/">
 
@@ -33,13 +33,13 @@
     <link href="signin.css" rel="stylesheet">
   </head>
   <body class="text-center">
-    <form class="form-signin">
-      <img class="mb-4" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1//assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+    <form class="form-signin" method="POST" action="login.php">
+      <img class="mb-4" src="../dashboard/img/handshake-icon.png" alt="" width="72" height="72">
       <h4 class="h5 mb-3 font-weight-normal">Por favor, entre com seus dados de acesso</h4>
       <label for="inputEmail" class="sr-only">E-mail</label>
-      <input type="email" id="inputEmail" class="form-control" placeholder="E-mail" required autofocus>
+      <input type="email" id="inputEmail" class="form-control" name="email" placeholder="E-mail" required autofocus>
       <label for="inputPassword" class="sr-only">Senha</label>
-      <input type="password" id="inputPassword" class="form-control" placeholder="Senha" required>
+      <input type="password" id="inputPassword" class="form-control" name="senha" placeholder="Senha" required>
       
       <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
       <p class="mt-5 mb-3 text-muted">&copy;2020</p>

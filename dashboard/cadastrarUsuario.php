@@ -14,7 +14,7 @@ Author: Bruno Brandão
 //  }else{
   
 	require_once '../class/DAO/Conexao.class.php';
-//	require_once '../class/DAO/Usuarios.php';
+	require_once '../class/DAO/Usuarios.php';
 	require_once '../class/DAO/Apoiadores.php';
    
 //	$id = $_SESSION['admin'];
@@ -26,14 +26,13 @@ Author: Bruno Brandão
 
 
 
-
 ?>
 
 
 <!doctype html>
 <html lang="pt-BR">
   <head>
-	<title>Apoiadores</title>
+	<title>Gerenciar Apoiadores</title>
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -44,8 +43,8 @@ Author: Bruno Brandão
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 	
 	<script>
-		$(document).ready(function($){
-			$("#apoio_telefone").mask("(00) 00000-0000");
+		jQuery(function($){
+		$("#apoio_telefone").mask("(00) 0000-00009");
 		});
 	</script>
 </head>
@@ -53,20 +52,39 @@ Author: Bruno Brandão
 
 	<nav class="navbar navbar-light bg-light">
 		<div class="container">
-			<a class="navbar-brand">Cadastro de Apoiadores - Orleando 2020</a>
+			<a class="navbar-brand">Cadastrar Apoiador</a>
 		</div>
 	</nav>	  
 	<div class="container">
 		<div class="card">
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item active"><a href="#">Início</a></li>
+					<li class="breadcrumb-item"><a href="#">Início</a></li>
+					<li class="breadcrumb-item"><a href="gerenciarApoiadores.php">Gerenciar Apoiadores</a></li>
+					<li class="breadcrumb-item active" aria-current="page">Cadastrar Apoiador</li>
 				</ol>
 			</nav>
 			<div class="card-body">
-				<h5>Bem vindo! Por favor, escolha a opção desejada.</h5>
-				
-				
+				<?php
+                      if(isset($_GET['erro']) && $_GET['erro']=='apoiador-ja-cadastrado'){ ?>
+                        <div class='animated shake alert alert-danger alert-dismissible' style='border:1px solid red; text-align: center; margin-top: 10px;'>
+                        	<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+                        <strong>Apoiador já cadastrado anteriormente! Evite cadastros em duplicidade.</strong></div>
+                <?php }; ?>
+				<form action="cadastrar.php" name="form1" method="POST" enctype="multipart/form-data">
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<label for="apoio_nome">Nome</label>
+							<input type="text" class="form-control" id="apoio_nome" name="apoio_nome" required>
+						</div>
+						<div class="form-group col-md-6">
+							<label for="apoio_telefone">Telefone</label>
+							<input type="tel" maxlength="18" data-mask="(00) 0000-00009" placeholder="(00) 00000-0000"  pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4,5}" class="form-control" id="apoio_telefone" name="apoio_telefone" required>
+						</div>
+					</div>
+					<input type="hidden" name="cadastrar-usuario" value="form1">
+					<button type="submit" class="btn btn-primary">Cadastrar!</button>
+				</form>
 			</div>
 		</div>
 
