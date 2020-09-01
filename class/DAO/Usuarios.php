@@ -67,7 +67,7 @@
             $consulta_teste = mysqli_query($this->conexao->getCon(), $sql_teste);
             $teste= mysqli_fetch_assoc($consulta_teste);
             if(!empty($teste)){
-                header("location: inserirUsuario.php?erro=usuario-ja-cadastrado");
+                header("location: cadastrarUsuario.php?erro=usuario-ja-cadastrado");
             }else{
                 $sql= "INSERT INTO usuarios (usu_nome, usu_login, usu_senha, usu_tipo)
                  VALUES('$nome','$login','$senha','$tipo')";

@@ -4,25 +4,25 @@ Author: Bruno Brandão
 
 <?php
 
-//session_start();
-//ob_start();
+session_start();
+ob_start();
 
-//if(!isset($_SESSION['admin'])){
+if(!isset($_SESSION['admin'])){
 
-//	header ('location: index.php?erro=login');
+	header ('location: ../sign-in/index.php?erro=login');
   
-//  }else{
+  }else{
   
 	require_once '../class/DAO/Conexao.class.php';
-//	require_once '../class/DAO/Usuarios.php';
+	require_once '../class/DAO/Usuarios.php';
 	require_once '../class/DAO/Apoiadores.php';
    
-//	$id = $_SESSION['admin'];
+	$id = $_SESSION['admin'];
   
-//	$usuarioDAO = new UsuarioDAO;
+	$usuarioDAO = new UsuarioDAO;
 	$apoiadoresDAO = new ApoiadoresDAO;
   
-//	$usuario = $usuarioDAO->buscaUm($id);
+	$usuario = $usuarioDAO->buscaUm($id);
 
 
 
@@ -103,5 +103,5 @@ Author: Bruno Brandão
 
 
 <?php
- // };
+  };
 ?>

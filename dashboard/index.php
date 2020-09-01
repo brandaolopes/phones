@@ -4,25 +4,43 @@ Author: Bruno Brandão
 
 <?php
 
-//session_start();
-//ob_start();
+session_start();
+ob_start();
 
-//if(!isset($_SESSION['admin'])){
+// ** Logout the current user. **
+$logoutAction = $_SERVER['PHP_SELF']."?doLogout=true";
+if ((isset($_SERVER['QUERY_STRING'])) && ($_SERVER['QUERY_STRING'] != "")){
+  $logoutAction .="&". htmlentities($_SERVER['QUERY_STRING']);
+}
 
-//	header ('location: index.php?erro=login');
+if ((isset($_GET['doLogout'])) &&($_GET['doLogout']=="true")){
+  //to fully log out a visitor we need to clear the session varialbles
+  $_SESSION['admin'] = NULL;
+  unset($_SESSION['admin']);
+	
+  $logoutGoTo = "../sign-in/index.php?logout=sucesso";
+  if ($logoutGoTo) {
+    header("Location: $logoutGoTo");
+    exit;
+  }
+}
+
+if(!isset($_SESSION['admin'])){
+
+	header ('location: ../sign-in/index.php?erro=login');
   
-//  }else{
+  }else{
   
 	require_once '../class/DAO/Conexao.class.php';
-//	require_once '../class/DAO/Usuarios.php';
+	require_once '../class/DAO/Usuarios.php';
 	require_once '../class/DAO/Apoiadores.php';
    
-//	$id = $_SESSION['admin'];
+	$id = $_SESSION['admin'];
   
-//	$usuarioDAO = new UsuarioDAO;
+	$usuarioDAO = new UsuarioDAO;
 	$apoiadoresDAO = new ApoiadoresDAO;
   
-//	$usuario = $usuarioDAO->buscaUm($id);
+	$usuario = $usuarioDAO->buscaUm($id);
 
 
 
@@ -65,7 +83,20 @@ Author: Bruno Brandão
 			</nav>
 			<div class="card-body">
 				<h5>Bem vindo! Por favor, escolha a opção desejada.</h5>
-				
+				<div class="row">
+					<div class="col-2">
+						<a href="gerenciarApoiadores.php"><img src="./img/associados.png" class="img img-rounded" width="60"/></a>
+						<p><a href="gerenciarApoiadores.php">Apoiadores</a></p>
+					</div>
+					<div class="col-2">
+						<a href="gerenciarUsuarios.php"><img src="./img/people.png" class="img img-rounded" width="60"/></a>
+						<p><a href="gerenciarApoiadores.php">Administradores</a></p>
+					</div>
+					<div class="col-2">
+						<a href="<?php echo $logoutAction ?>"><img src="./img/Sair.png" class="img img-rounded" width="60"/></a>
+						<p><a href="<?php echo $logoutAction ?>">Sair</a></p>
+					</div>
+				</div>
 				
 			</div>
 		</div>
@@ -85,5 +116,5 @@ Author: Bruno Brandão
 
 
 <?php
- // };
+  };
 ?>

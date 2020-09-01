@@ -1,6 +1,6 @@
 <?php
 
-if(isset($_POST['cadastrar_usuario']) && ($_POST['cadastrar_usuario']=='form1')){
+if(isset($_POST['cadastrar-usuario']) && ($_POST['cadastrar-usuario']=='form1')){
     require_once '../class/DAO/Usuarios.php';
     require_once '../class/entidades/Usuarios.class.php';
 
@@ -8,7 +8,7 @@ if(isset($_POST['cadastrar_usuario']) && ($_POST['cadastrar_usuario']=='form1'))
     $usuario = new Usuarios;
 
     $nome = $_POST['usu_nome'];
-    $login = $_POST['usu_login'];
+    $login = $_POST['usu_email'];
     $senha = $_POST['usu_senha'];
 
     $usuario->setNome($nome);

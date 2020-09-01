@@ -4,25 +4,25 @@ Author: Bruno Brandão
 
 <?php
 
-//session_start();
-//ob_start();
+session_start();
+ob_start();
 
-//if(!isset($_SESSION['admin'])){
+if(!isset($_SESSION['admin'])){
 
-//	header ('location: index.php?erro=login');
+	header ('location: ../sign-in/index.php?erro=login');
   
-//  }else{
+  }else{
   
 	require_once '../class/DAO/Conexao.class.php';
 	require_once '../class/DAO/Usuarios.php';
 	require_once '../class/DAO/Apoiadores.php';
    
-//	$id = $_SESSION['admin'];
+	$id = $_SESSION['admin'];
   
-//	$usuarioDAO = new UsuarioDAO;
+	$usuarioDAO = new UsuarioDAO;
 	$apoiadoresDAO = new ApoiadoresDAO;
   
-//	$usuario = $usuarioDAO->buscaUm($id);
+	$usuario = $usuarioDAO->buscaUm($id);
 
 
 
@@ -32,7 +32,7 @@ Author: Bruno Brandão
 <!doctype html>
 <html lang="pt-BR">
   <head>
-	<title>Gerenciar Apoiadores</title>
+	<title>Cadastrar Usuário</title>
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -52,34 +52,40 @@ Author: Bruno Brandão
 
 	<nav class="navbar navbar-light bg-light">
 		<div class="container">
-			<a class="navbar-brand">Cadastrar Apoiador</a>
+			<a class="navbar-brand">Cadastrar Usuário</a>
 		</div>
 	</nav>	  
 	<div class="container">
 		<div class="card">
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="#">Início</a></li>
-					<li class="breadcrumb-item"><a href="gerenciarApoiadores.php">Gerenciar Apoiadores</a></li>
-					<li class="breadcrumb-item active" aria-current="page">Cadastrar Apoiador</li>
+					<li class="breadcrumb-item"><a href="index.php">Início</a></li>
+					<li class="breadcrumb-item"><a href="gerenciarUsuarios.php">Gerenciar Usuários</a></li>
+					<li class="breadcrumb-item active" aria-current="page">Cadastrar Usuário</li>
 				</ol>
 			</nav>
 			<div class="card-body">
 				<?php
-                      if(isset($_GET['erro']) && $_GET['erro']=='apoiador-ja-cadastrado'){ ?>
-                        <div class='animated shake alert alert-danger alert-dismissible' style='border:1px solid red; text-align: center; margin-top: 10px;'>
+                      if(isset($_GET['erro']) && $_GET['erro']=='usuario-ja-cadastrado'){ ?>
+                        <div class='animated shake alert alert-danger alert-dismissible col-md-6' style='border:1px solid red; text-align: center; margin-top: 10px;'>
                         	<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-                        <strong>Apoiador já cadastrado anteriormente! Evite cadastros em duplicidade.</strong></div>
+							<strong>Usuário já cadastrado anteriormente!</strong> 
+							<p>Evite cadastros em duplicidade.</p>
+						</div>
                 <?php }; ?>
 				<form action="cadastrar.php" name="form1" method="POST" enctype="multipart/form-data">
 					<div class="form-row">
 						<div class="form-group col-md-6">
-							<label for="apoio_nome">Nome</label>
-							<input type="text" class="form-control" id="apoio_nome" name="apoio_nome" required>
+							<label for="usu_nome">Nome:</label>
+							<input type="text" class="form-control" id="usu_nome" name="usu_nome" required>
 						</div>
 						<div class="form-group col-md-6">
-							<label for="apoio_telefone">Telefone</label>
-							<input type="tel" maxlength="18" data-mask="(00) 0000-00009" placeholder="(00) 00000-0000"  pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4,5}" class="form-control" id="apoio_telefone" name="apoio_telefone" required>
+							<label for="usu_email">Email:</label>
+							<input type="email"  placeholder="seunome@provedor.com.br"  class="form-control" id="usu_email" name="usu_email" required>
+						</div>
+						<div class="form-group col-md-4">
+							<label for="usu_senha">Senha:</label>
+							<input type="password" class="form-control" id="usu_senha" name="usu_senha" required>
 						</div>
 					</div>
 					<input type="hidden" name="cadastrar-usuario" value="form1">
@@ -103,5 +109,5 @@ Author: Bruno Brandão
 
 
 <?php
- // };
+  };
 ?>
